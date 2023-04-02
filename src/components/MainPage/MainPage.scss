@@ -99,6 +99,7 @@
     flex: 1 1 auto;
     &__hero{
         width: 100vw;
+        min-height: 40vw;
         position: relative;
         margin: 0px 0px 12.7vw 0px;
         box-shadow: inset 0px -2px rgba(0, 0, 0, 0.04);
@@ -115,7 +116,12 @@
                         line-height: 120.4%;
                         letter-spacing: 0.03em;
 
-                        margin: 0px 0px 12.6% 1%;
+                        margin: 0px 0px 7.6% 1%;
+                        & a{
+                            display: block;
+                            font-size: 2.5vw;
+                            color: #A4A8B2;
+                        }
                     }
                     &_subtitle{
                         max-width: 315px;
@@ -151,12 +157,22 @@
                             transition: all .3s ease 0s;
                         }
                     }
-                    @media (max-width: 992px){
+                    @media (max-width: 1800px){
+                        &_subtitle{
+                            font-size: 1.2vw;
+                        }
+                    }
+                    @media (max-width: 1800px){
+                        &_btn{
+                            font-size: 1.2vw;
+                        }
+                    }
+                    @media (max-width: 1300px){
                         &_subtitle{
                             font-size: 1.4vw;
                         }
                     }
-                    @media (max-width: 767px){
+                    @media (max-width: 1300px){
                         &_btn{
                             font-size: 1.4vw;
                         }
@@ -369,55 +385,57 @@
     }
     .photos{
         &__container{
-            padding: 0px 0px 0px 8px;
+            padding: 0px 8px 7vw 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            @media (max-width: 767px){
+                &{
+                    padding: 0px 8px 30vw 8px;
+                }
+            }
             .photos__body{
                 display: grid;
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: 1fr 1fr 1fr;
-                gap: 1.34vw 1.2vw;
-                grid-template-areas:
-                    ". ."
-                    ". ."
-                    ". .";
-                // @media (max-width: 992px){
-                //     &{
-                //         display: flex;
-                //         flex-direction: column;
-                //     }
-                // }
+                grid-template-columns: repeat(4, 1fr);
+                gap: 2% 1.4%;
+                @media (max-width: 767px){
+                    &{
+                        grid-template-rows: repeat(4, 1fr);
+                        grid-template-columns: repeat(1, 1fr);
+                    }
+                }
                 .photos__item{
                     max-width: 40vw;
                     max-height: 26.1vw;
                     display: flex;
                     gap: 1.7vw;
+                    @media (max-width: 767px){
+                        &{
+                            max-width: 100%;
+                            justify-content: space-between;
+                            max-height: 43vw;
+                        }
+                    }
                     .photos__card-small{
                         max-width: 19.2vw;
-                        // @media (max-width: 1900px){
-                        //     &{
-                        //         width: 22vw;
-                        //     }
-                        // }
-                        // @media (max-width: 992px){
-                        //     &{
-                        //         width: 50%;
-                        //     }
-                        // }
-                        // @media (max-width: 767px){
-                        //     &{
-                        //         width: 43vw;
-                        //     }
-                        // }
+                        min-height: 26.1vw;
+                        @media (max-width: 767px){
+                            &{
+                                max-width: 41vw;
+                            }
+                        }
                         & .photos__image{
                             cursor: pointer;
                             & img{
                                 border-radius: 8px 8px 0px 0px;
-                                width: 19.2vw;
-                                max-height: 13.5vw;
-                                // @media (max-width: 1900px) {
-                                //         & {
-                                //             max-width: 100%;
-                                //         }
-                                // }
+                                min-width: 18.2vw;
+                                max-height: 10vw;
+                                @media (max-width: 767px){
+                                    &{
+                                        width: 41vw;
+                                        max-height: 25vw;
+                                    }
+                                }
                             }
                             
                         }
@@ -426,10 +444,13 @@
                             border-radius: 0px 0px 8px 8px;
                             .photos__text{
                                 padding: 1.8vw 1.8vw 0px 2vw;
-                                height: 10vw;
-                                // @media (max-width: 767px){
-                                //     padding: 10px 10px 0px 10px;
-                                // }
+                                min-height: 10vw;
+                                @media (max-width: 767px){
+                                    &{
+                                        padding: 1vw 1vw 0px 1vw;
+                                        height: 17vw;
+                                    }
+                                }
                                 .photos__title{
                                     font-family: 'Helvetica Neue', sans-serif;
                                     font-size: 1vw;
@@ -444,7 +465,7 @@
                                     line-height: 123%;
                                     color: #A4A8B2;
 
-                                    margin: 6px 0px 17px 0px;
+                                    margin: 6px 0px 0.9vw 0px;
                                 }
                                 .photos__description{
                                     font-family: 'Helvetica Neue', sans-serif;
@@ -453,86 +474,142 @@
                                     line-height: 125%;
                                     color: #85878C;
                                 }
-                                // @media (max-width: 767px){
-                                //     .photos__title {
-                                //             font-size: 15px;
-                                //         }
-                                    
-                                //         .photos__subtitle {
-                                //             font-size: 9px;
-                                //             margin: 3px 0px 7px 0px;
-                                //         }
-                                    
-                                //         .photos__description {
-                                //             font-size: 10px;
-                                //             line-height: 15px;
-                                //         }
-                                // }
+                                @media (max-width: 767px){
+                                    .photos__title{
+                                    font-size: 2.5vw;
+                                    line-height: 100%;
+                                    }
+                                    .photos__subtitle{
+                                        font-size: 1.8vw;
+                                        line-height: 100%;
+                                        margin: 2px 0px 0.6vw 0px;
+                                    }
+                                    .photos__description{
+                                        font-size: 1.8vw;
+                                        line-height: 125%;
+                                    }
+                                }
                             }
                             .photos__buttons{
                                 border-top: 1px solid #eaeaea;
-                                height: 48px;
+                                min-height: 2.5vw;
                                 border-radius: 0px 0px 8px 8px;
                                 display: flex;
+                                justify-content: space-between;
                                 align-items: center;
 
                                 font-family: 'Helvetica Neue', sans-serif;
-                                font-size: 0.75vw;
+                                font-size: 0.7vw;
                                 color: #A4A8B2;
                                 font-weight: 400;
-                                padding: 0px 0px 0px 2vw;
-                                .bookmark-btn img{
+                                padding: 0px 10% 0px 10%;
+                                .photos__buttons_save {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                & button{
+                                    width: 20px;
+                                    height: 20px;
+                                }    
+                                & img{
+                                    width: 100%;
+                                    height: 100%;
                                     transition: all .3s ease 0s;
                                     &:hover{
                                         transform: scale(0.95);
                                         transition: all .3s ease 0s;
                                     }
                                 }
-                                &_like{
-                                    display: flex;
-                                    align-items: center;
-                                    gap: 8px;
-
-                                    margin: 0px 0px 0px 7.3vw;
-                                    & img{
-                                        transition: all .3s ease 0s;
-                                    }
-                                    & img:hover{
-                                        transform: scale(0.95);
-                                        transition: all .3s ease 0s;
+                                @media (max-width: 767px){
+                                    &{
+                                        min-height: 3vw;
                                     }
                                 }
-                                &_comment{
-                                    display: flex;
-                                    align-items: center;
-                                    gap: 8px;
-                                    margin: 0px 0px 0px 1.5vw;
-                                    & img{
-                                        transition: all .3s ease 0s;
-                                    }
-                                    & img:hover{
-                                        transform: scale(0.95);
-                                        transition: all .3s ease 0s;
-                                    }
                                 }
-                                // @media (max-width: 1900px){
-                                //     &_like{
-                                //         margin: 0px 0px 0px 100px;
-                                //     }
-                                // }
-                                // @media (max-width: 767px){
-                                //     &{
-                                //         padding: 0px 0px 0px 10px;
-                                //     }
-                                //     &_like{
-                                //         margin: 0px 0px 0px 10px;
-                                //     }
-                                // }
-                                // @media (max-width: 376px){
-                                //     &_comment{
-                                //         margin: 0px 0px 0px 10px;
-                                //     }
-                                // }
+                                &_reaction{
+                                    display: flex;
+                                    gap: 1.6vw;
+                                    .photos__buttons_like{
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 0.4vw;
+                                        & button {
+                                            width: 20px;
+                                            height: 20px;
+                                        }
+                                        & img{
+                                            width: 100%;
+                                            height: 100%;
+                                            transition: all .3s ease 0s;
+                                        }
+                                        & img:hover{
+                                            transform: scale(0.95);
+                                            transition: all .3s ease 0s;
+                                        }
+                                    }
+                                    .photos__buttons_comment{
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 0.4vw;
+                                        & button {
+                                                width: 20px;
+                                                height: 20px;
+                                            }
+                                        & img{
+                                            width: 100%;
+                                            height: 100%;
+                                            transition: all .3s ease 0s;
+                                        }
+                                        & img:hover{
+                                            transform: scale(0.95);
+                                            transition: all .3s ease 0s;
+                                        }
+                                    }
+                                    
+                                }
+                                @media (max-width: 992px){
+                                        .photos__buttons_save{
+                                            & button {
+                                                width: 13px;
+                                                height: 13px;
+                                            }
+                                        }
+                                        .photos__buttons_like{
+                                            & button{
+                                                width: 13px;
+                                                height: 13px;
+                                            }
+                                        }
+                                        .photos__buttons_comment{
+                                            & button{
+                                                width: 13px;
+                                                height: 13px;
+                                            }
+                                        }
+                                }
+                                @media (max-width: 767px){
+                                        &{
+                                            font-size: 1.5vw;
+                                        }
+                                        .photos__buttons_save{
+                                            & button {
+                                                width: 9px;
+                                                height: 9px;
+                                            }
+                                        }
+                                        .photos__buttons_like{
+                                            & button{
+                                                width: 9px;
+                                                height: 9px;
+                                            }
+                                        }
+                                        .photos__buttons_comment{
+                                            & button{
+                                                width: 9px;
+                                                height: 9px;
+                                            }
+                                        }
+                                }
                             }
                         }
                     }
@@ -546,25 +623,16 @@
                                 border-radius: 8px 0px 0px 8px;
                                 width: 19.2vw;
                                 height: 26vw;
-                                // @media (max-width: 1900px){
-                                //     &{
-                                //         width: 22vw;
-                                //     }
-                                // }
-                                // @media (max-width: 767px){
-                                //     &{
-                                //         width: 35vw;
-                                //         height: 400px;
-                                //     }
-                                // }
+                                @media (max-width: 767px){
+                                    &{
+                                        width: 30vw;
+                                        height: 100%;
+                                    }
+                                }
                             }
                         }
-                        // @media (max-width: 992px){
-                        //     &{
-                        //         max-width: 100%;
-                        //     }
-                        // }
                         .photos__card_content {
+                            position: relative;
                             .photos__text {
                                 padding: 2.4vw 1.8vw 0px 2vw;
                                 .photos__title {
@@ -590,47 +658,40 @@
                                     line-height: 138.461538%; /* 18/13 */
                                     color: #85878C;
                                 }
-                                // @media (max-width: 767px){
-                                //     &{
-                                //         max-width: 70%;
-                                //         padding: 15px 0px 15px 15px;
-                                //     }
-                                // .photos__title {
-                                //         font-size: 22px;
-                                //         line-height: 22px;
-                                //     }
-                                
-                                //     .photos__subtitle {
-                                //         font-size: 9px;
-                                //         line-height: 16px;
-                                //         margin: 3px 0px 7px 0px;
-                                //     }
-                                
-                                //     .photos__description {
-                                //         font-size: 10px;
-                                //         line-height: 16px;
-                                //     }
-                                // }
-                                // @media (max-width: 376px){
-                                //     &{
-                                //         max-width: 90%;
-                                //     }
-                                // }
+                                @media (max-width: 767px){
+                                    &{
+                                        max-width: 52vw;
+                                    }
+                                    .photos__title {
+                                    font-size: 3.5vw;
+                                    line-height: 68.75%; /* 22/32 */
+                                    }
+                                    .photos__subtitle {
+                                        font-size: 2vw;
+                                        line-height: 133.333333%; /* 16/12 */
+                                        margin: 0.5vw 0px 1.1vw 0px;
+                                    }
+                                    .photos__description {
+                                        font-size: 2vw;
+                                        line-height: 138.461538%; /* 18/13 */
+                                    }
+                                    }
                             }
                             .buttons-group{
-                                padding: 0px 0px 0px 40px;
+                                padding: 0px 0px 0px 9%;
                                 display: flex;
                                 gap: 16px;
-                                margin: 0px 0px 2.8vw 0px;
+                                height: 10%;
+                                margin: 0px 0px 13.7% 0px;
                                 &__order-button{
                                     font-family: 'Helvetica Neue', sans-serif;
-                                    font-size: 16px;
+                                    font-size: 1vw;
                                     font-weight: 700;
-                                    line-height: 20px;
+                                    line-height: 125%; /* 20/16 */
                                     color: #100e0b;
 
-                                    width: 10vw;
-                                    height: 48px;
+                                    width: 50%;
+                                    height: 100%;
                                     border-radius: 43px;
                                     border: 1px solid #dcdcdc;
 
@@ -644,10 +705,15 @@
                                         box-shadow: 0px 0px 10px #dcdcdc;
                                         transition: all .3s ease 0s;
                                     }
+                                    @media (max-width: 767px){
+                                        &{
+                                            font-size: 2vw;
+                                        }
+                                    }
                                 }
                                 &__more-button{
-                                    width: 48px;
-                                    height: 48px;
+                                    width: 15%;
+                                    height: 100%;
                                     border: 1px solid #dcdcdc;
                                     border-radius: 50%;
 
@@ -656,7 +722,7 @@
                                     justify-content: center;
                                     transition: all .3s ease 0s;
                                     & img{
-                                        width: 24px;
+                                        width: 40%;
                                     }
                                     &:hover{
                                         border: 1px solid #a2a2a2;
@@ -664,93 +730,59 @@
                                         box-shadow: 0px 0px 10px #dcdcdc;
                                         transition: all .3s ease 0s;
                                     }
+                                    @media (max-width: 767px){
+                                        &{
+                                            width: 9%;
+                                        }
+                                    }
                                 }
-                                // @media (max-width: 767px){
-                                //     &{
-                                //         padding: 0px 0px 0px 15px;
-                                //         margin: 0px 0px 37px 0px;
-                                //     }
-                                //     &__order-button{
-                                //         width: 132px;
-                                //         height: 42px;
-                                //     }
-                                //     &__more-button{
-                                //         width: 42px;
-                                //         height: 42px;
-                                //     }
-                                // }
-                                // @media (max-width: 376px){
-                                //         & {
-                                //             margin: 0px 0px px 0px;
-                                //         }
-                                    
-                                //         &__order-button {
-                                //             width: 112px;
-                                //             height: 32px;
-                                //         }
-                                    
-                                //         &__more-button {
-                                //             width: 32px;
-                                //             height: 32px;
-                                //         }
-                                // }
                             }
                             .photos__slider_item {
-                                width: 132px;
-                                height: 112px;
-
+                                height: 5.7vw;
                                 & img {
-                                    width: 132px;
-                                    height: 112px;
+                                    width: 100%;
+                                    height: 100%;
                                     border-radius: 8px;
                                 }
-                                // @media (max-width: 767px){
-                                //     &{
-                                //         width: 100px;
-                                //         height: 80px;
-                                //     }
-                                //     & img{
-                                //         width: 100px;
-                                //         height: 80px;
-                                //     }
-                                // }
-                                // @media (max-width: 376px){
-                                //     &{
-                                //         width: 80px;
-                                //         height: 60px;
-                                //     }
-                                //     & img{
-                                //         width: 80px;
-                                //         height: 60px;
-                                //     }
-                                // }
+                                @media (max-width: 767px){
+                                    &{
+                                        height: 10vw;
+                                    }
+                                }
                             }
                             .photos__buttons{
+                                position: absolute;
+                                bottom: 0;
+                                left: 0;
                                 border-top: 1px solid #eaeaea;
-                                height: 48px;
+                                width: 100%;
+                                min-height: 2.5vw;
                                 border-radius: 0px 0px 8px 8px;
                                 display: flex;
                                 align-items: center;
+                                justify-content: space-between;
 
                                 font-family: 'Helvetica Neue', sans-serif;
-                                font-size: 13px;
+                                font-size: 0.7vw;
                                 color: #A4A8B2;
                                 font-weight: 400;
-                                padding: 0px 0px 0px 1.8vw;
-                                .bookmark-btn img {
-                                        transition: all .3s ease 0s;
-                                        &:hover {
-                                            transform: scale(0.95);
-                                            transition: all .3s ease 0s;
-                                        }
+                                padding: 0px 10% 0px 10%;
+                                @media (max-width: 767px) {
+                                    & {
+                                        min-height: 3vw;
                                     }
-                                &_like{
+                                }
+                                .photos__buttons_save {
                                     display: flex;
                                     align-items: center;
-                                    gap: 8px;
-
-                                    margin: 0px 0px 0px 9.3vw;
-                                    & img{
+                                    justify-content: center;
+                                    & button {
+                                        width: 20px;
+                                        height: 20px;
+                                    }
+                                    & img {
+                                        width: 100%;
+                                        height: 100%;
                                         transition: all .3s ease 0s;
                                         &:hover {
                                             transform: scale(0.95);
@@ -758,26 +790,88 @@
                                         }
                                     }
                                 }
-                                &_comment{
+                                &_reaction{
                                     display: flex;
-                                    align-items: center;
-                                    gap: 8px;
-                                    margin: 0px 0px 0px 33px;
-                                    & img{
-                                        transition: all .3s ease 0s;
-                                        &:hover {
-                                            transform: scale(0.95);
+                                    gap: 1.6vw;
+                                    .photos__buttons_like{
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 0.4vw;
+                                        & button{
+                                            width: 20px;
+                                            height: 20px;
+                                        }
+                                        & img{
+                                            width: 100%;
+                                            height: 100%;
                                             transition: all .3s ease 0s;
+                                            &:hover {
+                                                transform: scale(0.95);
+                                                transition: all .3s ease 0s;
+                                            }
                                         }
                                     }
+                                    .photos__buttons_comment{
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 0.4vw;
+                                        & button {
+                                                width: 20px;
+                                                height: 20px;
+                                            }
+                                        & img{
+                                            width: 100%;
+                                            height: 100%;
+                                            transition: all .3s ease 0s;
+                                            &:hover {
+                                                transform: scale(0.95);
+                                                transition: all .3s ease 0s;
+                                            }
+                                        }
+                                    } 
                                 }
-                                @media (max-width: 727px){
-                                    &{
-                                        padding: 0px 0px 0px 15px;
-                                    }
-                                    &_like{
-                                        margin: 0px 0px 0px 40px;
-                                    }
+                                @media (max-width: 992px){
+                                        .photos__buttons_save{
+                                            & button {
+                                                width: 13px;
+                                                height: 13px;
+                                            }
+                                        }
+                                        .photos__buttons_like{
+                                            & button{
+                                                width: 13px;
+                                                height: 13px;
+                                            }
+                                        }
+                                        .photos__buttons_comment{
+                                            & button{
+                                                width: 13px;
+                                                height: 13px;
+                                            }
+                                        }
+                                }
+                                @media (max-width: 767px){
+                                        &{
+                                            font-size: 1.5vw;
+                                        }
+                                        .photos__buttons_save{
+                                            & button {
+                                                width: 9px;
+                                                height: 9px;
+                                            }
+                                        }
+                                        .photos__buttons_like{
+                                            & button{
+                                                width: 9px;
+                                                height: 9px;
+                                            }
+                                        }
+                                        .photos__buttons_comment{
+                                            & button{
+                                                width: 9px;
+                                                height: 9px;
+                                            }
+                                        }
                                 }
                             }
                         }
@@ -788,17 +882,12 @@
     }
 }
 .swiper{
-    width: 280px;
-    margin: 40px 0px 27px 40px;
-}
-@media (max-width: 767px){
-    .swiper{
-        width: 220px;
-        margin: 14px 0px 20px 15px;
-    }
-}
-@media (max-width: 376px){
-    .swiper{
-        width: 180px;
+    width: 14.7vw;
+    margin: 9.5% 0px 7.6% 11%;
+    @media (max-width: 767px){
+        &{
+            width: 30vw;
+            margin: 2% 0px 2% 11%;
+        }
     }
 }

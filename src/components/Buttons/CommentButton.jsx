@@ -19,12 +19,11 @@ const CommentButton = () => {
     return (
         <div className="photos__buttons_comment">
             <button
-                style={{ width: '20px', height:'20px'}}
                 className='comment-btn'
                 onClick={handleClick}
                 >
-                {commented ? (<img src={iconCommentFilled} alt="Comment" style={{ width: '20px', height:'20px'}}/>)
-                : (<img src={iconComment} alt="Comment" style={{ width: '20px', height:'20px'}}/>)}
+                {commented ? (<img src={iconCommentFilled} alt="Comment"/>)
+                : (<img src={iconComment} alt="Comment"/>)}
             </button>
             <span>{commentedCount}</span>
         </div>

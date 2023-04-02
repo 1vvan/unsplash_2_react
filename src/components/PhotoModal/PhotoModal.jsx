@@ -8,7 +8,8 @@ import modalImageBeach from '../../assets/images/modalImage_beach.png'
 import buttonMore from '../../assets/icons/buttonMore.png'
 import './PhotoModal.scss'
 
-const PhotoModal = ({showModal, setShowModal}) => {
+const PhotoModal = ({ showModal, setShowModal }) => {
+    
     return (
         <div className={showModal ? "modal active" : "modal"} onClick={() => setShowModal(false)}>
             <div className="modal__body">

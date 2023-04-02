@@ -1,23 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import iconUser from '../../assets/icons/iconUser.svg'
 import iconSearch from '../../assets/icons/iconSearch.svg'
 import heroImage from '../../assets/images/heroImage.jpg'
-import mainImageRiver from '../../assets/images/mainImage_river.png'
-import mainImageBridge from '../../assets/images/mainImage_bridge.png'
-import mainImageRoad from '../../assets/images/mainImage_road.png'
-import LikeButton from '../Buttons/LikeButton';
-import CommentButton from '../Buttons/CommentButton';
-import BookmarkButton from '../Buttons/BookmarkButton';
 import PhotoModal from '../PhotoModal/PhotoModal';
-import buttonMore from '../../assets/icons/buttonMore.png'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper-bundle.min.css';
+import ImageItem from '../ImageItem/ImageItem';
 import './MainPage.scss'
-
 
 const MainPage = () => {
     const [selectedHeroBtn, setSelectedHeroBtn] = useState(null);
     const [showModal, setShowModal] = useState(false);
+
+    const [randomImage, setRandomImage] = useState({});
+    useEffect(() => {
+    const fetchRandomImage = async () => {
+        const response = await fetch(`https://api.unsplash.com/photos/random?client_id=rbPbnLR-xIOACH1d9pp_Wljai0of3oHtlJoN7_isCC4&orientation=landscape`);
+        const data = await response.json();
+        setRandomImage(data);
+    };
+
+    fetchRandomImage();
+    }, []);
+
 
     const handleClickHeroBtn = (index) => {
         if (selectedHeroBtn === index) {
@@ -30,7 +33,7 @@ const MainPage = () => {
 
     return (
         <div className='wrapper'>
-            <PhotoModal showModal={showModal} setShowModal={setShowModal} />
+            <PhotoModal showModal={showModal} setShowModal={setShowModal}/>
             <header className="header">
                 <div className="header__container  _container">
                     <nav className='header__menu menu'>
@@ -58,19 +61,18 @@ const MainPage = () => {
             </header>
             <main className="main">
                 <div className="main__hero hero">
-                        <div className="hero__content">
-                            <div className="hero__text">
-                                <div className="hero__text_title">Photo of the Day by guangxi liu</div>
-                                <div className="hero__text_subtitle">The internet's source of freely usable images. Powered by creators everywhere.</div>
-                                <div className="hero__text_btn">
-                                    <a href='/'>Explore All</a>
+                    <div className="hero__content">
+                                <div className="hero__text">
+                                    <div className="hero__text_title">Photo of the Day by <a href='/'>{randomImage.user && randomImage.user.username ? randomImage.user.username : 'user'}</a></div>
+                                    <div className="hero__text_subtitle">{randomImage.alt_description ? randomImage.alt_description : "Lorem"}</div>
+                                    <div className="hero__text_btn">
+                                        <a href='/'>Explore All</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="hero__image">
-                            <img src={heroImage} alt="" />
+                                <div className="hero__image">
+                                <img src={randomImage.urls && randomImage.urls.full ? randomImage.urls.full : heroImage} alt={''} />
+                                </div>
                         </div>
-                        </div>
-                        
                         <div className="hero__search search">
                             <div className="search__content">
                                 <div className="search__input">
@@ -105,7 +107,50 @@ const MainPage = () => {
                 <div className="main__photos photos">
                     <div className="photos__container _container">
                         <div className="photos__body">
-                            <div className="photos__item">
+                            {/* {images.map((image) => (
+                                <div className="photos__item">
+                                <div className="photos__card-small">
+                                    <div className="photos__image" onClick={() => setShowModal(true)}>
+                                        <img src={image.urls.full} alt='' loading="lazy"/>
+                                    </div>
+                                    <div className="photos__card_content">
+                                        <div className="photos__text">
+                                                <div className="photos__title">{image.user.name}</div>
+                                            <div className="photos__subtitle">{image.user.location}</div>
+                                                <div className="photos__description">{image.description || 'No description available'}</div>
+                                        </div>
+                                        <div className="photos__buttons">
+                                                <BookmarkButton />
+                                            <div className='photos__buttons_reaction'>
+                                                <LikeButton />
+                                                <CommentButton />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="photos__card-small">
+                                    <div className="photos__image" onClick={() => setShowModal(true)}>
+                                        <img src={image.urls.full} alt='' loading="lazy"/>
+                                    </div>
+                                    <div className="photos__card_content">
+                                        <div className="photos__text">
+                                                <div className="photos__title">{image.user.name}</div>
+                                            <div className="photos__subtitle">{image.user.location}</div>
+                                                <div className="photos__description">{image.description || 'No description available'}</div>
+                                        </div>
+                                        <div className="photos__buttons">
+                                                <BookmarkButton />
+                                            <div className='photos__buttons_reaction'>
+                                                <LikeButton />
+                                                <CommentButton />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            ))} */}
+                            <ImageItem setShowModal={setShowModal} />
+                            {/* <div className="photos__item">
                                 <div className="photos__card-small">
                                     <div className="photos__image" onClick={() => setShowModal(true)}>
                                         <img src={mainImageRiver} alt="" />
@@ -118,8 +163,10 @@ const MainPage = () => {
                                         </div>
                                         <div className="photos__buttons">
                                             <BookmarkButton />
-                                            <LikeButton />
-                                            <CommentButton />
+                                            <div className='photos__buttons_reaction'>
+                                                <LikeButton />
+                                                <CommentButton />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -135,8 +182,10 @@ const MainPage = () => {
                                         </div>
                                         <div className="photos__buttons">
                                             <BookmarkButton />
-                                            <LikeButton />
-                                            <CommentButton />
+                                            <div className='photos__buttons_reaction'>
+                                                <LikeButton />
+                                                <CommentButton />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -171,8 +220,10 @@ const MainPage = () => {
                                         </div>
                                         <div className="photos__buttons">
                                             <BookmarkButton />
-                                            <LikeButton />
-                                            <CommentButton />
+                                            <div className='photos__buttons_reaction'>
+                                                <LikeButton />
+                                                <CommentButton />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -207,8 +258,10 @@ const MainPage = () => {
                                         </div>
                                         <div className="photos__buttons">
                                             <BookmarkButton />
-                                            <LikeButton />
-                                            <CommentButton />
+                                            <div className='photos__buttons_reaction'>
+                                                <LikeButton />
+                                                <CommentButton />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -226,8 +279,10 @@ const MainPage = () => {
                                         </div>
                                         <div className="photos__buttons">
                                             <BookmarkButton />
-                                            <LikeButton />
-                                            <CommentButton />
+                                            <div className='photos__buttons_reaction'>
+                                                <LikeButton />
+                                                <CommentButton />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -243,8 +298,10 @@ const MainPage = () => {
                                         </div>
                                         <div className="photos__buttons">
                                             <BookmarkButton />
-                                            <LikeButton />
-                                            <CommentButton />
+                                            <div className='photos__buttons_reaction'>
+                                                <LikeButton />
+                                                <CommentButton />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -262,8 +319,10 @@ const MainPage = () => {
                                         </div>
                                         <div className="photos__buttons">
                                             <BookmarkButton />
-                                            <LikeButton />
-                                            <CommentButton />
+                                            <div className='photos__buttons_reaction'>
+                                                <LikeButton />
+                                                <CommentButton />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -279,8 +338,10 @@ const MainPage = () => {
                                         </div>
                                         <div className="photos__buttons">
                                             <BookmarkButton />
-                                            <LikeButton />
-                                            <CommentButton />
+                                            <div className='photos__buttons_reaction'>
+                                                <LikeButton />
+                                                <CommentButton />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -298,8 +359,10 @@ const MainPage = () => {
                                         </div>
                                         <div className="photos__buttons">
                                             <BookmarkButton />
-                                            <LikeButton />
-                                            <CommentButton />
+                                            <div className='photos__buttons_reaction'>
+                                                <LikeButton />
+                                                <CommentButton />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -315,12 +378,14 @@ const MainPage = () => {
                                         </div>
                                         <div className="photos__buttons">
                                             <BookmarkButton />
-                                            <LikeButton />
-                                            <CommentButton />
+                                            <div className='photos__buttons_reaction'>
+                                                <LikeButton />
+                                                <CommentButton />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

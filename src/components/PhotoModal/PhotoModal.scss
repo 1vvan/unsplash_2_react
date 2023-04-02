@@ -1,51 +1,41 @@
 .modal {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 2;
     width: 100%;
-    height: 3049px;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
 
     display: flex;
+    justify-content: center;
+    align-items: center;
     opacity: 0;
     transition: all .4s ease 0s;
     pointer-events: none;
-    @media (max-width: 992px){
-        &{
-            height: 4028px;
-        }
-    }
-    @media (max-width: 767px){
-        &{
-            height: 3029px;
-        }
-    }
-    @media (max-width: 376px){
-        &{
-            height: 2955px;
-        }
-    }
     &.active{
         opacity: 1;
         transition: all .4s ease 0s;
         pointer-events: all;
     }
     &__body{
-        position: absolute;
-        top: 1300px;
-        left: 50%;
-        z-index: 3;
-        transform: translateX(-50%);
+        position: relative;
+        max-height: calc(100vh - 100px);
+        overflow: auto;
         width: 57.5vw;
         border: 2px solid #eaeaea;
         background-color: #fff;
 
-        padding: 48px 0px 0px 34px;
+        padding: 26vw 0px 1vw 0.5vw;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         
         @media (max-width: 1900px){
             &{
-                padding: 50px 5px;
+                padding: 93vw 0px 1vw 0.5vw;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -53,7 +43,18 @@
         }
         @media (max-width: 767px){
             &{
+                padding: 109vw 0px 1vw 0.5vw;
                 width: 80vw;
+            }
+        }
+        @media (max-width: 376px){
+            &{
+                padding: 115vw 0px 1vw 0.5vw;
+            }
+        }
+        @media (max-width: 321px){
+            &{
+                padding: 125vw 0px 1vw 0.5vw;
             }
         }
     }
@@ -85,9 +86,7 @@
         display: flex;
         align-items: center;
         gap: 26px;
-        @media (max-width: 1900px){
-            width: 95%;
-        }
+        width: 95%;
         &_image{
             width: 85.98px;
             height: 80px;
@@ -146,6 +145,20 @@
                     ". .";
             }
         }
+        @media (max-width: 330px){
+            &{
+                grid-template-columns: 1fr 1fr; 
+                grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr; 
+                gap: 10px 20px; 
+                grid-template-areas: 
+                    ". ."
+                    ". ."
+                    ". ."
+                    ". ."
+                    ". ."
+                    ". .";
+            }
+        }
 
         &_item{
             width: 7vw;
@@ -184,9 +197,6 @@
     }
     &__button-more{
         cursor: pointer;
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
+        margin: 30px 25px 0px 0px;
     }
 }

@@ -11,14 +11,15 @@ const BookmarkButton = () => {
     };
 
     return (
-        <button
-            style={{ width: '20px', height:'20px'}}
-            className='bookmark-btn'
-            onClick={handleClick}
-            >
-            {marked ? (<img src={iconBookmarkFilled} alt="Bookmark" style={{ width: '20px', height:'20px'}}/>)
-            : (<img src={iconBookmark} alt="Bookmark" style={{ width: '20px', height:'20px'}}/>)}
-        </button>
+        <div className="photos__buttons_save">
+            <button
+                className='save-btn'
+                onClick={handleClick}
+                >
+                {marked ? (<img src={iconBookmarkFilled} alt="Bookmark"/>)
+                : (<img src={iconBookmark} alt="Bookmark"/>)}
+            </button>
+        </div>
     );
 }
 
