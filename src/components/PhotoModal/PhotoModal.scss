@@ -1,0 +1,192 @@
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 3049px;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    opacity: 0;
+    transition: all .4s ease 0s;
+    pointer-events: none;
+    @media (max-width: 992px){
+        &{
+            height: 4028px;
+        }
+    }
+    @media (max-width: 767px){
+        &{
+            height: 3029px;
+        }
+    }
+    @media (max-width: 376px){
+        &{
+            height: 2955px;
+        }
+    }
+    &.active{
+        opacity: 1;
+        transition: all .4s ease 0s;
+        pointer-events: all;
+    }
+    &__body{
+        position: absolute;
+        top: 1300px;
+        left: 50%;
+        z-index: 3;
+        transform: translateX(-50%);
+        width: 57.5vw;
+        border: 2px solid #eaeaea;
+        background-color: #fff;
+
+        padding: 48px 0px 0px 34px;
+        
+        @media (max-width: 1900px){
+            &{
+                padding: 50px 5px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        @media (max-width: 767px){
+            &{
+                width: 80vw;
+            }
+        }
+    }
+    &__close-btn{
+        cursor: pointer;
+        position: absolute;
+        top: 13px;
+        right: 51px;
+        width: 20px;
+        height: 20px;
+        & img{
+            width: 100%;
+            height: 100%;
+        }
+        @media (max-width: 767px){
+            right: 20px;
+        }
+    }
+    &__image{
+        width: 95%;
+        height: 60%;
+        & img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    &__user{
+        margin: 32px 0px 0px 0px;
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        @media (max-width: 1900px){
+            width: 95%;
+        }
+        &_image{
+            width: 85.98px;
+            height: 80px;
+            & img{
+                height: 100%;
+                width: 100%;
+            }
+        }
+        &_name{
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 22px;
+            color: #100E0B;
+            margin: 0px 0px 5px 0px;
+        }
+        &_account{
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 12px;
+            line-height: 16px;
+            color: #a4a8b2;
+        }
+    }
+    &__photos{
+        margin: 33px 0px 0px 0px;
+        display: grid; 
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
+        grid-template-rows: 1fr 1fr; 
+        gap: 20px 0px; 
+        grid-template-areas: 
+            ". . . . . ."
+            ". . . . . ."; 
+        @media (max-width: 1900px){
+            &{
+                grid-template-columns: 1fr 1fr 1fr; 
+                grid-template-rows: 1fr 1fr 1fr 1fr; 
+                gap: 10px 50px; 
+                grid-template-areas: 
+                    ". . ."
+                    ". . ."
+                    ". . ."
+                    ". . .";
+            }
+        }
+        @media (max-width: 992px){
+            &{
+                grid-template-columns: 1fr 1fr; 
+                grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr; 
+                gap: 10px 50px; 
+                grid-template-areas: 
+                    ". ."
+                    ". ."
+                    ". ."
+                    ". ."
+                    ". ."
+                    ". .";
+            }
+        }
+
+        &_item{
+            width: 7vw;
+            &.boat{
+                width: 10vw;
+                margin: 0px 10px 0px 0px;
+                & img{
+                    width: 10vw;
+                    height: 100%;
+                }
+                @media (max-width: 992px){
+                    & img{
+                        width: 131px;
+                    }
+                }
+                @media (max-width: 767px){
+                    &{
+                        width: 100px;
+                        margin: 0px 0px 0px 0px;
+                    }
+                    & img{
+                        width: 100px;
+                    }
+                }
+            }
+            @media (max-width: 767px){
+                & {
+                        width: 100px;
+                    }
+                    & img{
+                        width: 100px;
+                    }
+                }
+        }
+
+    }
+    &__button-more{
+        cursor: pointer;
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
