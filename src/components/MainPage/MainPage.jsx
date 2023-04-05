@@ -35,18 +35,19 @@ const MainPage = () => {
     // Handle Search Photos
     const handleSearch = async (query) => {
         const response = await fetch(
-          `https://api.unsplash.com/search/photos?query=${query}&client_id=rbPbnLR-xIOACH1d9pp_Wljai0of3oHtlJoN7_isCC4&orientation=landscape&per_page=12`
+          `https://api.unsplash.com/search/photos?query=${query}&client_id=rbPbnLR-xIOACH1d9pp_Wljai0of3oHtlJoN7_isCC4&orientation=landscape&per_page=20`
         );
         const data = await response.json();
         setSearchResults(data.results);
     };    
 
-
+    // Load randomImage to SET_SELECTED_USER_IMAGE in Redux Store
     const dispatch = useDispatch();
     const handleUsernameClick = async (randomImage) => {
         await dispatch({ type: "SET_SELECTED_USER_IMAGE", payload: randomImage })
     }
 
+    // Get selectedUserImage from Redux Store
     const selectedUser = useSelector(state => state.user.selectedUserImage);
     // eslint-disable-next-line
     const [userInfo, setUserInfo] = useState([]);
