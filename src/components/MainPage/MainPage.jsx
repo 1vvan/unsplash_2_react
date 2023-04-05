@@ -6,7 +6,7 @@ import PhotoModal from '../PhotoModal/PhotoModal';
 import ImageItem from '../ImageItem/ImageItem';
 import './MainPage.scss'
 import SearchForm from '../SearchForm/SearchForm';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RotatingLines } from 'react-loader-spinner';
 
@@ -46,19 +46,6 @@ const MainPage = () => {
     const handleUsernameClick = async (randomImage) => {
         await dispatch({ type: "SET_SELECTED_USER_IMAGE", payload: randomImage })
     }
-
-    // Get selectedUserImage from Redux Store
-    const selectedUser = useSelector(state => state.user.selectedUserImage);
-    // eslint-disable-next-line
-    const [userInfo, setUserInfo] = useState([]);
-    useEffect(() => {
-        const fetchUserPhotos = async () => {
-            const response = await fetch(`https://api.unsplash.com/users/${selectedUser.username}?client_id=rbPbnLR-xIOACH1d9pp_Wljai0of3oHtlJoN7_isCC4`);
-            const data = await response.json();
-            setUserInfo(data);
-        };
-        fetchUserPhotos();
-    }, [selectedUser.username]);
 
     return (
         <div className='wrapper'>

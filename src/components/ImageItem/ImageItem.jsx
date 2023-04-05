@@ -18,39 +18,6 @@ const ImageItem = ({setShowModal, setImages, images, searchResults}) => {
         fetchImages();
     }, [setImages])
 
-
-
-    // const images = [
-    //     {
-    //         id: "M6eWvLb2EYY",
-    //         urls: {
-    //             full: "https://images.unsplash.com/photo-1553531087-b25a0b9a68ab?crop=entropy&cs=srgb&fm=jpg&ixid=Mnw0Mjk4NTN8MXwxfGFsbHwxfHx8fHx8Mnx8MTY4MDQ1NDI3MA&ixlib=rb-4.0.3&q=85"
-    //         },
-    //         user: {
-    //             name: "Boxed Water Is Better",
-    //             location: "Holland, MI",
-    //             username:'1111'
-    //         },
-    //         description: null,
-    //         alt_description: "Boxed Water cartons on the black and white ground",
-    //         likes: 124
-    //     },
-    //     {
-    //         id: "hJo714ChDA4",
-    //         urls: {
-    //             full: "https://images.unsplash.com/photo-1680399524821-d4e6b225b0ee?crop=entropy&cs=srgb&fm=jpg&ixid=Mnw0Mjk4NTN8MHwxfGFsbHwyfHx8fHx8Mnx8MTY4MDQ1NDI3MA&ixlib=rb-4.0.3&q=85"
-    //         },
-    //         user: {
-    //             name: "Jason An",
-    //             location: "Montreal, Canada",
-    //             username:'2222'
-    //         },
-    //         description: null,
-    //         alt_description: "a woman leaning against a wall with a cup of coffee",
-    //         likes: 342
-    //     },
-    // ]
-
     const dispatch = useDispatch();
     const handleImageClick = async (image) => {
         await dispatch({ type: "SET_SELECTED_IMAGE", payload: image })
