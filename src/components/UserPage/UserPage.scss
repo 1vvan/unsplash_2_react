@@ -1,0 +1,235 @@
+.user{
+    &__container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        padding: 0px 0px 5vw 0px;
+        & .returnBtn{
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-weight: 600;
+            font-size: 0.7vw;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all .3s ease 0s;
+            & img{
+                width: 1.5vw;
+                height: 1.2vw;
+            }
+            &:hover{
+                transform: scale(0.98);
+                transition: all .3s ease 0s;
+            }
+            @media (max-width: 992px){
+                &{
+                    font-size: 1.4vw;
+                }
+                & img{
+                    width: 3vw;
+                    height: 2vw;
+                }
+            }
+            @media (max-width: 767px){
+                &{
+                    font-size: 2vw;
+                }
+                & img{
+                    width: 3vw;
+                    height: 2.5vw;
+                }
+            }
+        }
+        .user__info{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 4vw 0px 4vw 0px;
+            border-bottom: 1px solid #979cab;
+            &_body{
+                display: flex;
+                gap: 3vw;
+                @media (max-width: 992px){
+                    &{
+                        flex-direction: column;
+                        align-items: center;
+                    }
+                }
+                .user__info_side{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                .user__avatar{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 9vw;
+                    height: 9vw;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    box-shadow: 0px 0px 10px #2b2c30;
+                    & img{
+                        width: 100%;
+                        height: 100%;
+                    }
+                    @media (max-width: 767px){
+                        &{
+                            width: 17vw;
+                            height: 17vw;
+                        }
+                    }
+                }
+                .user__links{
+                    margin: 0.5vw 0px 0px 0px;
+                    font-family: 'Helvetica Neue', sans-serif;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    .user__nickname{
+                        font-weight: 500;
+                    }
+                    .user__links_social{
+                        margin: 0.5vw 0px 0px 0px;
+                        display: flex;
+                        gap: 0.6vw;
+                        .user__links_item{
+                            width: 1.7vw;
+                            height: 1.7vw;
+                            & img{
+                                width: 100%;
+                                height: 100%;
+                            }
+                            @media (max-width: 992px){
+                                &{
+                                    width: 2.5vw;
+                                    height: 2.5vw;
+                                }
+                            }
+                            @media (max-width: 767px){
+                                &{
+                                    width: 5vw;
+                                    height: 5vw;
+                                }
+                            }
+                        }
+                        @media (max-width: 767px){
+                            &{
+                                gap: 2vw;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            }
+            &_main{
+                @media (max-width: 992px){
+                    &{
+                        max-width: 90%;
+                    }
+                }
+                .user__info_main-name{
+                    font-family: "Segoe UI", sans-serif;
+                    font-size: 2vw;
+                    margin: 0px 0px 1.2vw 0px;
+                    @media (max-width: 767px){
+                        &{
+                            font-size: 4vw;
+                        }
+                    }
+                }
+                .user__info_main-stats{
+                    font-family: 'Helvetica Neue', sans-serif;
+                    font-size: 0.8vw;
+                    display: flex;
+                    justify-content: space-between;
+                    & div{
+                        width: 40%;
+                        padding: 0px 0px 5px 0px;
+                        border-bottom: 1px solid rgb(155, 155, 155);
+                    }
+                    @media (max-width: 992px){
+                        &{
+                            font-size: 1.5vw;
+                        }
+                    }
+                    @media (max-width: 767px){
+                        &{
+                            font-size: 3vw;
+                        }
+                    }
+                }
+                .user__info_main-another-info{
+                    font-family: 'Helvetica Neue', sans-serif;
+                    margin: 1vw 0px 0px 0px;
+                    .user-another-info-item{
+                        color: #777b86;
+                        display: flex;
+                        align-items: center;
+                        gap: 0.3vw;
+                        margin: 0.7vw 0px 0px 0px;
+                        & img{
+                            width: 1.2vw;
+                            height: 1.2vw;
+                        }
+                        @media (max-width: 992px){
+                            & img{
+                                width: 2vw;
+                                height: 2vw;
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+        .user__photos{
+            margin: 4vw 0px 0px 0px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2vw;
+            &_item{
+                width: 15vw;
+                height: 15vw;
+                & img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                @media (max-width: 992px){
+                    &{
+                        width: 20vw;
+                        height: 20vw;
+                    }
+                }
+                @media (max-width: 767px){
+                    &{
+                        width: 25vw;
+                        height: 25vw;
+                    }
+                }
+            }
+            @media (max-width: 767px){
+                &{
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+        }
+        .user__photos_more{
+            margin: 0 auto; 
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 1vw;
+            margin: 2vw 0px 0px 0px;
+            & a{
+                cursor: pointer;
+                :hover{
+                    color: #979cab;
+                }
+            }
+        }
+    }
+}

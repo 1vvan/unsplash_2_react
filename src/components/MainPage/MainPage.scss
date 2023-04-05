@@ -117,7 +117,7 @@
                         letter-spacing: 0.03em;
 
                         margin: 0px 0px 7.6% 1%;
-                        & a{
+                        & .username{
                             display: block;
                             font-size: 2.5vw;
                             color: #A4A8B2;
@@ -181,10 +181,14 @@
             }
             .hero__image{
                 width: 59.6vw;
-                max-height: 101vh;
+                height: 50vw;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 & img{
                     width: 100%;
-                    max-height: 100%;
+                    height: 100%;
+                    object-fit: cover;
                 }
             }
             .search{
@@ -400,8 +404,7 @@
                 gap: 2% 1.4%;
                 @media (max-width: 767px){
                     &{
-                        grid-template-rows: repeat(4, 1fr);
-                        grid-template-columns: repeat(1, 1fr);
+                        grid-template-columns: repeat(2, 1fr);
                     }
                 }
                 .photos__item{
@@ -416,26 +419,25 @@
                             max-height: 43vw;
                         }
                     }
-                    .photos__card-small{
+                    .photos__card{
+                        min-width: 19.1vw;
                         max-width: 19.2vw;
                         min-height: 26.1vw;
                         @media (max-width: 767px){
                             &{
-                                max-width: 41vw;
+                                min-width: 41.9vw;
+                                max-width: 42vw;
                             }
                         }
                         & .photos__image{
                             cursor: pointer;
+                            width: 100%;
+                            height: 10vw;
                             & img{
+                                width: 100%;
+                                height: 100%;
                                 border-radius: 8px 8px 0px 0px;
-                                min-width: 18.2vw;
-                                max-height: 10vw;
-                                @media (max-width: 767px){
-                                    &{
-                                        width: 41vw;
-                                        max-height: 25vw;
-                                    }
-                                }
+                                object-fit: cover;
                             }
                             
                         }
@@ -445,10 +447,11 @@
                             .photos__text{
                                 padding: 1.8vw 1.8vw 0px 2vw;
                                 min-height: 10vw;
+                                max-height: 10.1vw ;
                                 @media (max-width: 767px){
                                     &{
                                         padding: 1vw 1vw 0px 1vw;
-                                        height: 17vw;
+                                        max-height: 16vw;
                                     }
                                 }
                                 .photos__title{
@@ -464,7 +467,7 @@
                                     font-weight: 400;
                                     line-height: 123%;
                                     color: #A4A8B2;
-
+                                    
                                     margin: 6px 0px 0.9vw 0px;
                                 }
                                 .photos__description{
@@ -566,269 +569,6 @@
                                         }
                                     }
                                     
-                                }
-                                @media (max-width: 992px){
-                                        .photos__buttons_save{
-                                            & button {
-                                                width: 13px;
-                                                height: 13px;
-                                            }
-                                        }
-                                        .photos__buttons_like{
-                                            & button{
-                                                width: 13px;
-                                                height: 13px;
-                                            }
-                                        }
-                                        .photos__buttons_comment{
-                                            & button{
-                                                width: 13px;
-                                                height: 13px;
-                                            }
-                                        }
-                                }
-                                @media (max-width: 767px){
-                                        &{
-                                            font-size: 1.5vw;
-                                        }
-                                        .photos__buttons_save{
-                                            & button {
-                                                width: 9px;
-                                                height: 9px;
-                                            }
-                                        }
-                                        .photos__buttons_like{
-                                            & button{
-                                                width: 9px;
-                                                height: 9px;
-                                            }
-                                        }
-                                        .photos__buttons_comment{
-                                            & button{
-                                                width: 9px;
-                                                height: 9px;
-                                            }
-                                        }
-                                }
-                            }
-                        }
-                    }
-                    .photos__card-big{
-                        display: flex;
-                        border-radius: 8px;
-                        border: 1px solid #eaeaea;
-                        .photos__image {
-                            cursor: pointer;
-                            & img{
-                                border-radius: 8px 0px 0px 8px;
-                                width: 19.2vw;
-                                height: 26vw;
-                                @media (max-width: 767px){
-                                    &{
-                                        width: 30vw;
-                                        height: 100%;
-                                    }
-                                }
-                            }
-                        }
-                        .photos__card_content {
-                            position: relative;
-                            .photos__text {
-                                padding: 2.4vw 1.8vw 0px 2vw;
-                                .photos__title {
-                                    font-family: 'Helvetica Neue', sans-serif;
-                                    font-size: 1.7vw;
-                                    font-weight: 500;
-                                    line-height: 68.75%; /* 22/32 */
-                                    color: #100e0b;
-                                }
-                                .photos__subtitle {
-                                    font-family: 'Helvetica Neue', sans-serif;
-                                    font-size: 0.7vw;
-                                    font-weight: 400;
-                                    line-height: 133.333333%; /* 16/12 */
-                                    color: #A4A8B2;
-
-                                    margin: 0.5vw 0px 1.1vw 0px;
-                                }
-                                .photos__description {
-                                    font-family: 'Helvetica Neue', sans-serif;
-                                    font-size: 0.68vw;
-                                    font-weight: 400;
-                                    line-height: 138.461538%; /* 18/13 */
-                                    color: #85878C;
-                                }
-                                @media (max-width: 767px){
-                                    &{
-                                        max-width: 52vw;
-                                    }
-                                    .photos__title {
-                                    font-size: 3.5vw;
-                                    line-height: 68.75%; /* 22/32 */
-                                    }
-                                    .photos__subtitle {
-                                        font-size: 2vw;
-                                        line-height: 133.333333%; /* 16/12 */
-                                        margin: 0.5vw 0px 1.1vw 0px;
-                                    }
-                                    .photos__description {
-                                        font-size: 2vw;
-                                        line-height: 138.461538%; /* 18/13 */
-                                    }
-                                    }
-                            }
-                            .buttons-group{
-                                padding: 0px 0px 0px 9%;
-                                display: flex;
-                                gap: 16px;
-                                height: 10%;
-                                margin: 0px 0px 13.7% 0px;
-                                &__order-button{
-                                    font-family: 'Helvetica Neue', sans-serif;
-                                    font-size: 1vw;
-                                    font-weight: 700;
-                                    line-height: 125%; /* 20/16 */
-                                    color: #100e0b;
-
-                                    width: 50%;
-                                    height: 100%;
-                                    border-radius: 43px;
-                                    border: 1px solid #dcdcdc;
-
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    transition: all .3s ease 0s;
-                                    &:hover{
-                                        border: 1px solid #a2a2a2;
-                                        transform: scale(0.98);
-                                        box-shadow: 0px 0px 10px #dcdcdc;
-                                        transition: all .3s ease 0s;
-                                    }
-                                    @media (max-width: 767px){
-                                        &{
-                                            font-size: 2vw;
-                                        }
-                                    }
-                                }
-                                &__more-button{
-                                    width: 15%;
-                                    height: 100%;
-                                    border: 1px solid #dcdcdc;
-                                    border-radius: 50%;
-
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    transition: all .3s ease 0s;
-                                    & img{
-                                        width: 40%;
-                                    }
-                                    &:hover{
-                                        border: 1px solid #a2a2a2;
-                                        transform: scale(0.98);
-                                        box-shadow: 0px 0px 10px #dcdcdc;
-                                        transition: all .3s ease 0s;
-                                    }
-                                    @media (max-width: 767px){
-                                        &{
-                                            width: 9%;
-                                        }
-                                    }
-                                }
-                            }
-                            .photos__slider_item {
-                                height: 5.7vw;
-                                & img {
-                                    width: 100%;
-                                    height: 100%;
-                                    border-radius: 8px;
-                                }
-                                @media (max-width: 767px){
-                                    &{
-                                        height: 10vw;
-                                    }
-                                }
-                            }
-                            .photos__buttons{
-                                position: absolute;
-                                bottom: 0;
-                                left: 0;
-                                border-top: 1px solid #eaeaea;
-                                width: 100%;
-                                min-height: 2.5vw;
-                                border-radius: 0px 0px 8px 8px;
-                                display: flex;
-                                align-items: center;
-                                justify-content: space-between;
-
-                                font-family: 'Helvetica Neue', sans-serif;
-                                font-size: 0.7vw;
-                                color: #A4A8B2;
-                                font-weight: 400;
-                                padding: 0px 10% 0px 10%;
-                                @media (max-width: 767px) {
-                                    & {
-                                        min-height: 3vw;
-                                    }
-                                }
-                                .photos__buttons_save {
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    & button {
-                                        width: 20px;
-                                        height: 20px;
-                                    }
-                                    & img {
-                                        width: 100%;
-                                        height: 100%;
-                                        transition: all .3s ease 0s;
-                                        &:hover {
-                                            transform: scale(0.95);
-                                            transition: all .3s ease 0s;
-                                        }
-                                    }
-                                }
-                                &_reaction{
-                                    display: flex;
-                                    gap: 1.6vw;
-                                    .photos__buttons_like{
-                                        display: flex;
-                                        align-items: center;
-                                        gap: 0.4vw;
-                                        & button{
-                                            width: 20px;
-                                            height: 20px;
-                                        }
-                                        & img{
-                                            width: 100%;
-                                            height: 100%;
-                                            transition: all .3s ease 0s;
-                                            &:hover {
-                                                transform: scale(0.95);
-                                                transition: all .3s ease 0s;
-                                            }
-                                        }
-                                    }
-                                    .photos__buttons_comment{
-                                        display: flex;
-                                        align-items: center;
-                                        gap: 0.4vw;
-                                        & button {
-                                                width: 20px;
-                                                height: 20px;
-                                            }
-                                        & img{
-                                            width: 100%;
-                                            height: 100%;
-                                            transition: all .3s ease 0s;
-                                            &:hover {
-                                                transform: scale(0.95);
-                                                transition: all .3s ease 0s;
-                                            }
-                                        }
-                                    } 
                                 }
                                 @media (max-width: 992px){
                                         .photos__buttons_save{

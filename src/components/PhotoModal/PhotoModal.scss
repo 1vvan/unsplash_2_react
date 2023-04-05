@@ -20,22 +20,22 @@
     }
     &__body{
         position: relative;
+        z-index: 3;
         max-height: calc(100vh - 100px);
         overflow: auto;
-        width: 57.5vw;
+        width: 60vw;
+        max-height: 90vh;
         border: 2px solid #eaeaea;
         background-color: #fff;
 
-        padding: 26vw 0px 1vw 0.5vw;
+        padding: 28vw 0px 1vw 0.5vw;
 
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        
         @media (max-width: 1900px){
             &{
-                padding: 93vw 0px 1vw 0.5vw;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -43,157 +43,104 @@
         }
         @media (max-width: 767px){
             &{
-                padding: 109vw 0px 1vw 0.5vw;
                 width: 80vw;
-            }
-        }
-        @media (max-width: 376px){
-            &{
-                padding: 115vw 0px 1vw 0.5vw;
-            }
-        }
-        @media (max-width: 321px){
-            &{
-                padding: 125vw 0px 1vw 0.5vw;
             }
         }
     }
     &__close-btn{
         cursor: pointer;
         position: absolute;
-        top: 13px;
-        right: 51px;
-        width: 20px;
-        height: 20px;
+        top: 0.7vw;
+        right: 0.5vw;
+        width: 1.8vw;
+        height: 1.8vw;
         & img{
             width: 100%;
             height: 100%;
         }
-        @media (max-width: 767px){
-            right: 20px;
-        }
     }
     &__image{
-        width: 95%;
-        height: 60%;
+        width: 90%;
+        max-height: 60%;
         & img{
             width: 100%;
             height: 100%;
         }
     }
     &__user{
-        margin: 32px 0px 0px 0px;
+        margin: 2vw 0px 0px 0px;
         display: flex;
         align-items: center;
-        gap: 26px;
-        width: 95%;
-        &_image{
-            width: 85.98px;
-            height: 80px;
+        gap: 1vw;
+        width: 90%;
+        &_avatar{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 6vw;
+            border-radius: 50%;
+            overflow: hidden;
             & img{
                 height: 100%;
                 width: 100%;
             }
         }
+        &_text{
+            display: flex;
+            flex-direction: column;
+            & a{
+                :hover{
+                    color: #a4a8b2;
+                }
+            }
+        }
         &_name{
             font-family: 'Helvetica Neue', sans-serif;
-            font-size: 18px;
+            font-size: 1.2vw;
             font-weight: 500;
-            line-height: 22px;
             color: #100E0B;
             margin: 0px 0px 5px 0px;
+            :hover{
+                color: #a4a8b2;
+            }
         }
         &_account{
             font-family: 'Helvetica Neue', sans-serif;
-            font-size: 12px;
-            line-height: 16px;
+            font-size: 0.9vw;
             color: #a4a8b2;
         }
+        &_stats{
+            margin: 0px 0px 0px 2vw;
+            display: flex;
+            gap: 2vw;
+            &-item{
+                font-family: 'Helvetica Neue', sans-serif;
+                font-size: 1vw;
+                padding: 0px 0px 0.4vw 0px;
+                border-bottom: 1.2px solid black;
+            }
+        }
     }
-    &__photos{
-        margin: 33px 0px 0px 0px;
-        display: grid; 
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
-        grid-template-rows: 1fr 1fr; 
-        gap: 20px 0px; 
-        grid-template-areas: 
-            ". . . . . ."
-            ". . . . . ."; 
-        @media (max-width: 1900px){
-            &{
-                grid-template-columns: 1fr 1fr 1fr; 
-                grid-template-rows: 1fr 1fr 1fr 1fr; 
-                gap: 10px 50px; 
-                grid-template-areas: 
-                    ". . ."
-                    ". . ."
-                    ". . ."
-                    ". . .";
-            }
-        }
-        @media (max-width: 992px){
-            &{
-                grid-template-columns: 1fr 1fr; 
-                grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr; 
-                gap: 10px 50px; 
-                grid-template-areas: 
-                    ". ."
-                    ". ."
-                    ". ."
-                    ". ."
-                    ". ."
-                    ". .";
-            }
-        }
-        @media (max-width: 330px){
-            &{
-                grid-template-columns: 1fr 1fr; 
-                grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr; 
-                gap: 10px 20px; 
-                grid-template-areas: 
-                    ". ."
-                    ". ."
-                    ". ."
-                    ". ."
-                    ". ."
-                    ". .";
-            }
-        }
-
+    &__another-info{
+        margin: 1vw 0px 0px 0px;
+        width: 90%;
         &_item{
-            width: 7vw;
-            &.boat{
-                width: 10vw;
-                margin: 0px 10px 0px 0px;
-                & img{
-                    width: 10vw;
-                    height: 100%;
-                }
-                @media (max-width: 992px){
-                    & img{
-                        width: 131px;
-                    }
-                }
-                @media (max-width: 767px){
-                    &{
-                        width: 100px;
-                        margin: 0px 0px 0px 0px;
-                    }
-                    & img{
-                        width: 100px;
-                    }
-                }
-            }
-            @media (max-width: 767px){
-                & {
-                        width: 100px;
-                    }
-                    & img{
-                        width: 100px;
-                    }
-                }
-        }
+            margin: 0.5vw 0px 0px 0px;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-weight: 300;
+            font-size: 1.2vw;
+            height: 1.7vw;
 
+            display: flex;
+            align-items: center;
+            gap: 0.4vw;
+            & img{
+                height: 100%;
+            }
+        }
+    }
+    &__chart{
+        width: 90%;
     }
     &__button-more{
         cursor: pointer;

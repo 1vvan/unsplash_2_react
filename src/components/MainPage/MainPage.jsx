@@ -1,35 +1,63 @@
 import React, { useEffect, useState } from 'react';
 import iconUser from '../../assets/icons/iconUser.svg'
 import iconSearch from '../../assets/icons/iconSearch.svg'
-import heroImage from '../../assets/images/heroImage.jpg'
 import PhotoModal from '../PhotoModal/PhotoModal';
+// eslint-disable-next-line
 import ImageItem from '../ImageItem/ImageItem';
 import './MainPage.scss'
+import SearchForm from '../SearchForm/SearchForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { RotatingLines } from 'react-loader-spinner';
 
 const MainPage = () => {
+    // eslint-disable-next-line
+    const [images, setImages] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [selectedHeroBtn, setSelectedHeroBtn] = useState(null);
+    // eslint-disable-next-line
+    const [searchResults, setSearchResults] = useState([]);
     const [showModal, setShowModal] = useState(false);
 
+    // Get Random Image for Hero
     const [randomImage, setRandomImage] = useState({});
     useEffect(() => {
     const fetchRandomImage = async () => {
         const response = await fetch(`https://api.unsplash.com/photos/random?client_id=rbPbnLR-xIOACH1d9pp_Wljai0of3oHtlJoN7_isCC4&orientation=landscape`);
         const data = await response.json();
         setRandomImage(data);
+        setIsLoading(false)
     };
 
     fetchRandomImage();
     }, []);
 
+    // Handle Search Photos
+    const handleSearch = async (query) => {
+        const response = await fetch(
+          `https://api.unsplash.com/search/photos?query=${query}&client_id=rbPbnLR-xIOACH1d9pp_Wljai0of3oHtlJoN7_isCC4&orientation=landscape&per_page=12`
+        );
+        const data = await response.json();
+        setSearchResults(data.results);
+    };    
 
-    const handleClickHeroBtn = (index) => {
-        if (selectedHeroBtn === index) {
-        setSelectedHeroBtn(null);
-        } else {
-        setSelectedHeroBtn(index);
-        }
-    };
 
+    const dispatch = useDispatch();
+    const handleUsernameClick = async (randomImage) => {
+        await dispatch({ type: "SET_SELECTED_USER_IMAGE", payload: randomImage })
+    }
+
+    const selectedUser = useSelector(state => state.user.selectedUserImage);
+    // eslint-disable-next-line
+    const [userInfo, setUserInfo] = useState([]);
+    useEffect(() => {
+        const fetchUserPhotos = async () => {
+            const response = await fetch(`https://api.unsplash.com/users/${selectedUser.username}?client_id=rbPbnLR-xIOACH1d9pp_Wljai0of3oHtlJoN7_isCC4`);
+            const data = await response.json();
+            setUserInfo(data);
+        };
+        fetchUserPhotos();
+    }, [selectedUser.username]);
 
     return (
         <div className='wrapper'>
@@ -63,329 +91,39 @@ const MainPage = () => {
                 <div className="main__hero hero">
                     <div className="hero__content">
                                 <div className="hero__text">
-                                    <div className="hero__text_title">Photo of the Day by <a href='/'>{randomImage.user && randomImage.user.username ? randomImage.user.username : 'user'}</a></div>
-                                    <div className="hero__text_subtitle">{randomImage.alt_description ? randomImage.alt_description : "Lorem"}</div>
-                                    <div className="hero__text_btn">
-                                        <a href='/'>Explore All</a>
+                            <div className="hero__text_title">Photo of the Day by
+                                    <span className='username'>{randomImage.user && randomImage.user.username ? randomImage.user.username : ''}</span>
+                            </div>
+                                    <div className="hero__text_subtitle">
+                                        {randomImage.alt_description ? 
+                                        randomImage.alt_description.charAt(0).toUpperCase() + randomImage.alt_description.slice(1) : 
+                                        ""}
+                                    </div>
+                            <div className="hero__text_btn">
+                                        <Link to={`/user`}>
+                                            <span onClick={() => handleUsernameClick(randomImage)}>Explore All</span>
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className="hero__image">
-                                <img src={randomImage.urls && randomImage.urls.full ? randomImage.urls.full : heroImage} alt={''} />
+                                    {!isLoading ? 
+                                    (<img src={randomImage.urls && randomImage.urls.full ? randomImage.urls.full : ''} alt={''} />)
+                                    : (<RotatingLines
+                                        strokeColor="green"
+                                        strokeWidth="5"
+                                        animationDuration="0.75"
+                                        width="96"
+                                        visible={true}
+                                        />)
+                                    }
                                 </div>
                         </div>
-                        <div className="hero__search search">
-                            <div className="search__content">
-                                <div className="search__input">
-                                    <input type="text" placeholder='Search for high-resolution photos' />
-                                    <button type='button' className='search__btn'>
-                                        <img src={iconSearch} alt="" />
-                                    </button>
-                                </div>
-                                <div className="search__category_list">
-                                     {[
-                                        { id: 0, text: 'Trending' },
-                                        { id: 1, text: 'Nature' },
-                                        { id: 2, text: 'Travel' },
-                                        { id: 3, text: 'Animals' },
-                                        { id: 4, text: 'Food' },
-                                        { id: 5, text: 'Health' },
-                                        { id: 6, text: 'Technology' },
-                                        { id: 7, text: 'Events' },
-                                    ].map(({ id, text }) => (
-                                        <button
-                                        key={id}
-                                        className={selectedHeroBtn === id ? 'search__category_item selected' : 'search__category_item'}
-                                        onClick={() => handleClickHeroBtn(id)}
-                                        >
-                                        {text}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                    <SearchForm onSearch={handleSearch} selectedHeroBtn={selectedHeroBtn} setSelectedHeroBtn={setSelectedHeroBtn} />
                 </div>
                 <div className="main__photos photos">
                     <div className="photos__container _container">
                         <div className="photos__body">
-                            {/* {images.map((image) => (
-                                <div className="photos__item">
-                                <div className="photos__card-small">
-                                    <div className="photos__image" onClick={() => setShowModal(true)}>
-                                        <img src={image.urls.full} alt='' loading="lazy"/>
-                                    </div>
-                                    <div className="photos__card_content">
-                                        <div className="photos__text">
-                                                <div className="photos__title">{image.user.name}</div>
-                                            <div className="photos__subtitle">{image.user.location}</div>
-                                                <div className="photos__description">{image.description || 'No description available'}</div>
-                                        </div>
-                                        <div className="photos__buttons">
-                                                <BookmarkButton />
-                                            <div className='photos__buttons_reaction'>
-                                                <LikeButton />
-                                                <CommentButton />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="photos__card-small">
-                                    <div className="photos__image" onClick={() => setShowModal(true)}>
-                                        <img src={image.urls.full} alt='' loading="lazy"/>
-                                    </div>
-                                    <div className="photos__card_content">
-                                        <div className="photos__text">
-                                                <div className="photos__title">{image.user.name}</div>
-                                            <div className="photos__subtitle">{image.user.location}</div>
-                                                <div className="photos__description">{image.description || 'No description available'}</div>
-                                        </div>
-                                        <div className="photos__buttons">
-                                                <BookmarkButton />
-                                            <div className='photos__buttons_reaction'>
-                                                <LikeButton />
-                                                <CommentButton />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            ))} */}
-                            <ImageItem setShowModal={setShowModal} />
-                            {/* <div className="photos__item">
-                                <div className="photos__card-small">
-                                    <div className="photos__image" onClick={() => setShowModal(true)}>
-                                        <img src={mainImageRiver} alt="" />
-                                    </div>
-                                    <div className="photos__card_content">
-                                        <div className="photos__text">
-                                            <div className="photos__title">Tom Öhlin</div>
-                                            <div className="photos__subtitle">Indjinup Spa, WA, Australia (TAGS)</div>
-                                            <div className="photos__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
-                                        </div>
-                                        <div className="photos__buttons">
-                                            <BookmarkButton />
-                                            <div className='photos__buttons_reaction'>
-                                                <LikeButton />
-                                                <CommentButton />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="photos__card-small">
-                                    <div className="photos__image" onClick={() => setShowModal(true)}>
-                                        <img src={mainImageBridge} alt="" />
-                                    </div>
-                                    <div className="photos__card_content">
-                                        <div className="photos__text">
-                                            <div className="photos__title">Featured meal</div>
-                                            <div className="photos__subtitle">Served with french fries + drink</div>
-                                            <div className="photos__description">Choice of: Coke, Fanta, Sprite, Upgrade to large fries, Add whopper patty, Add Tender crisp patty and more.</div>
-                                        </div>
-                                        <div className="photos__buttons">
-                                            <BookmarkButton />
-                                            <div className='photos__buttons_reaction'>
-                                                <LikeButton />
-                                                <CommentButton />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="photos__item">
-                                <div className="photos__card-big">
-                                    <div className="photos__image" onClick={() => setShowModal(true)}>
-                                        <img src={mainImageRoad} alt="" />
-                                    </div>
-                                    <div className="photos__card_content">
-                                        <div className="photos__text">
-                                            <div className="photos__title">Featured meal</div>
-                                            <div className="photos__subtitle">Served with french fries + drink</div>
-                                            <div className="photos__description">Choice of: Coke, Fanta, Sprite, Upgrade to large fries, Add whopper patty, Add Tender crisp patty and more. Add Tender crisp patty and more.</div>
-                                        </div>
-                                        <Swiper
-                                            spaceBetween={16}
-                                            slidesPerView={2}
-                                            >
-                                            <SwiperSlide className='photos__slider_item'><img src={mainImageRiver} alt="" /></SwiperSlide>
-                                            <SwiperSlide className='photos__slider_item'><img src={mainImageBridge} alt="" /></SwiperSlide>
-                                            <SwiperSlide className='photos__slider_item'><img src={mainImageRiver} alt="" /></SwiperSlide>
-                                            <SwiperSlide className='photos__slider_item'><img src={mainImageBridge} alt="" /></SwiperSlide>
-                                            <SwiperSlide className='photos__slider_item'><img src={mainImageRiver} alt="" /></SwiperSlide>
-                                            <SwiperSlide className='photos__slider_item'><img src={mainImageBridge} alt="" /></SwiperSlide>
-                                        </Swiper>
-                                        <div className="photos__buttons-group buttons-group">
-                                            <button className="buttons-group__order-button">Order Now</button>
-                                            <button className="buttons-group__more-button">
-                                                <img src={buttonMore} alt="" />
-                                            </button>
-                                        </div>
-                                        <div className="photos__buttons">
-                                            <BookmarkButton />
-                                            <div className='photos__buttons_reaction'>
-                                                <LikeButton />
-                                                <CommentButton />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="photos__item">
-                                <div className="photos__card-big">
-                                    <div className="photos__image" onClick={() => setShowModal(true)}>
-                                        <img src={mainImageRoad} alt="" />
-                                    </div>
-                                    <div className="photos__card_content">
-                                        <div className="photos__text">
-                                            <div className="photos__title">Featured meal</div>
-                                            <div className="photos__subtitle">Served with french fries + drink</div>
-                                            <div className="photos__description">Choice of: Coke, Fanta, Sprite, Upgrade to large fries, Add whopper patty, Add Tender crisp patty and more. Add Tender crisp patty and more.</div>
-                                        </div>
-                                        <Swiper
-                                            spaceBetween={16}
-                                            slidesPerView={2}
-                                            >
-                                            <SwiperSlide className='photos__slider_item'><img src={mainImageRiver} alt="" /></SwiperSlide>
-                                            <SwiperSlide className='photos__slider_item'><img src={mainImageBridge} alt="" /></SwiperSlide>
-                                            <SwiperSlide className='photos__slider_item'><img src={mainImageRiver} alt="" /></SwiperSlide>
-                                            <SwiperSlide className='photos__slider_item'><img src={mainImageBridge} alt="" /></SwiperSlide>
-                                            <SwiperSlide className='photos__slider_item'><img src={mainImageRiver} alt="" /></SwiperSlide>
-                                            <SwiperSlide className='photos__slider_item'><img src={mainImageBridge} alt="" /></SwiperSlide>
-                                        </Swiper>
-                                        <div className="photos__buttons-group buttons-group">
-                                            <button className="buttons-group__order-button">Order Now</button>
-                                            <button className="buttons-group__more-button">
-                                                <img src={buttonMore} alt="" />
-                                            </button>
-                                        </div>
-                                        <div className="photos__buttons">
-                                            <BookmarkButton />
-                                            <div className='photos__buttons_reaction'>
-                                                <LikeButton />
-                                                <CommentButton />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="photos__item">
-                                <div className="photos__card-small">
-                                    <div className="photos__image" onClick={() => setShowModal(true)}>
-                                        <img src={mainImageBridge} alt="" />
-                                    </div>
-                                    <div className="photos__card_content">
-                                        <div className="photos__text">
-                                            <div className="photos__title">Featured meal</div>
-                                            <div className="photos__subtitle">Served with french fries + drink</div>
-                                            <div className="photos__description">Choice of: Coke, Fanta, Sprite, Upgrade to large fries, Add whopper patty, Add Tender crisp patty and more.</div>
-                                        </div>
-                                        <div className="photos__buttons">
-                                            <BookmarkButton />
-                                            <div className='photos__buttons_reaction'>
-                                                <LikeButton />
-                                                <CommentButton />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="photos__card-small">
-                                    <div className="photos__image" onClick={() => setShowModal(true)}>
-                                        <img src={mainImageRiver} alt="" />
-                                    </div>
-                                    <div className="photos__card_content">
-                                        <div className="photos__text">
-                                            <div className="photos__title">Featured meal</div>
-                                            <div className="photos__subtitle">Served with french fries + drink</div>
-                                            <div className="photos__description">Choice of: Coke, Fanta, Sprite, Upgrade to large fries, Add whopper patty, Add Tender crisp patty and more.</div>
-                                        </div>
-                                        <div className="photos__buttons">
-                                            <BookmarkButton />
-                                            <div className='photos__buttons_reaction'>
-                                                <LikeButton />
-                                                <CommentButton />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="photos__item">
-                                <div className="photos__card-small">
-                                    <div className="photos__image" onClick={() => setShowModal(true)}>
-                                        <img src={mainImageBridge} alt="" />
-                                    </div>
-                                    <div className="photos__card_content">
-                                        <div className="photos__text">
-                                            <div className="photos__title">Featured meal</div>
-                                            <div className="photos__subtitle">Served with french fries + drink</div>
-                                            <div className="photos__description">Choice of: Coke, Fanta, Sprite, Upgrade to large fries, Add whopper patty, Add Tender crisp patty and more.</div>
-                                        </div>
-                                        <div className="photos__buttons">
-                                            <BookmarkButton />
-                                            <div className='photos__buttons_reaction'>
-                                                <LikeButton />
-                                                <CommentButton />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="photos__card-small">
-                                    <div className="photos__image" onClick={() => setShowModal(true)}>
-                                        <img src={mainImageRiver} alt="" />
-                                    </div>
-                                    <div className="photos__card_content">
-                                        <div className="photos__text">
-                                            <div className="photos__title">Featured meal</div>
-                                            <div className="photos__subtitle">Served with french fries + drink</div>
-                                            <div className="photos__description">Choice of: Coke, Fanta, Sprite, Upgrade to large fries, Add whopper patty, Add Tender crisp patty and more.</div>
-                                        </div>
-                                        <div className="photos__buttons">
-                                            <BookmarkButton />
-                                            <div className='photos__buttons_reaction'>
-                                                <LikeButton />
-                                                <CommentButton />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="photos__item">
-                                <div className="photos__card-small">
-                                    <div className="photos__image" onClick={() => setShowModal(true)}>
-                                        <img src={mainImageBridge} alt="" />
-                                    </div>
-                                    <div className="photos__card_content">
-                                        <div className="photos__text">
-                                            <div className="photos__title">Featured meal</div>
-                                            <div className="photos__subtitle">Served with french fries + drink</div>
-                                            <div className="photos__description">Choice of: Coke, Fanta, Sprite, Upgrade to large fries, Add whopper patty, Add Tender crisp patty and more.</div>
-                                        </div>
-                                        <div className="photos__buttons">
-                                            <BookmarkButton />
-                                            <div className='photos__buttons_reaction'>
-                                                <LikeButton />
-                                                <CommentButton />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="photos__card-small">
-                                    <div className="photos__image" onClick={() => setShowModal(true)}>
-                                        <img src={mainImageRiver} alt="" />
-                                    </div>
-                                    <div className="photos__card_content">
-                                        <div className="photos__text">
-                                            <div className="photos__title">Featured meal</div>
-                                            <div className="photos__subtitle">Served with french fries + drink</div>
-                                            <div className="photos__description">Choice of: Coke, Fanta, Sprite, Upgrade to large fries, Add whopper patty, Add Tender crisp patty and more.</div>
-                                        </div>
-                                        <div className="photos__buttons">
-                                            <BookmarkButton />
-                                            <div className='photos__buttons_reaction'>
-                                                <LikeButton />
-                                                <CommentButton />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
+                            <ImageItem searchResults={searchResults} setShowModal={setShowModal} images={images} setImages={setImages} />
                         </div>
                     </div>
                 </div>
