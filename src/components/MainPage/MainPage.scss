@@ -120,7 +120,14 @@
                         & .username{
                             display: block;
                             font-size: 2.5vw;
-                            color: #A4A8B2;
+                            color: #8f929a;
+                            transition: all .3s ease 0s;
+                            &:hover{
+                                &{
+                                    color: #b3b7c2;
+                                    transition: all .3s ease 0s;
+                                }
+                            }
                         }
                     }
                     &_subtitle{
@@ -618,6 +625,14 @@
                     }
                 }
             }
+        }
+    }
+    .main__photos_more{
+        margin: 2vw 0px 2vw 0px;
+        text-align: center;
+        & span{
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 1vw;
         }
     }
 }

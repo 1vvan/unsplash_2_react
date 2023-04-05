@@ -92,7 +92,9 @@ const MainPage = () => {
                     <div className="hero__content">
                                 <div className="hero__text">
                             <div className="hero__text_title">Photo of the Day by
-                                    <span className='username'>{randomImage.user && randomImage.user.username ? randomImage.user.username : ''}</span>
+                                <Link to={`/user`}>
+                                    <span onClick={() => handleUsernameClick(randomImage)} className='username'>{randomImage.user && randomImage.user.username ? randomImage.user.username : ''}</span>
+                                </Link>
                             </div>
                                     <div className="hero__text_subtitle">
                                         {randomImage.alt_description ? 
@@ -126,6 +128,9 @@ const MainPage = () => {
                             <ImageItem searchResults={searchResults} setShowModal={setShowModal} images={images} setImages={setImages} />
                         </div>
                     </div>
+                </div>
+                <div className="main__photos_more">
+                        <span>That's All...</span>
                 </div>
             </main>
         </div>

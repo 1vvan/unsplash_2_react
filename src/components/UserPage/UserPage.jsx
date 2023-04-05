@@ -67,7 +67,7 @@ const UserPage = () => {
         fetchUserPhotos();
     }, [selectedUser.user.username]);
 
-    // We accept an array of users photos from Unsplash API
+    // Accept an array of users photos from Unsplash API
     const [userPhotos, setUserPhotos] = useState([]);
     useEffect(() => {
         const fetchUserPhotos = async () => {
@@ -115,7 +115,7 @@ const UserPage = () => {
                                                 </a>
                                             </div>
                                         )}
-                                        {userInfo && userInfo.social.portfolio_url ? (
+                                        {userInfo && userInfo.social && userInfo.social.portfolio_url ? (
                                             <div className="user__links_item">
                                                 <a target="_blank" rel="noopener noreferrer" href={userInfo.social.portfolio_url}>
                                                     <img src="https://cdn-icons-png.flaticon.com/512/696/696755.png" alt="" />
@@ -172,7 +172,7 @@ const UserPage = () => {
                     ))}
                     
                 </div>
-                {userInfo && userInfo.social.portfolio_url ? (
+                {userInfo && userInfo.social && userInfo.social.portfolio_url ? (
                         <div className='user__photos_more'>
                             <a target="_blank" rel="noopener noreferrer" href={userInfo.social.portfolio_url}>
                                 See more in the portfolio

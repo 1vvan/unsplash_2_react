@@ -11,7 +11,7 @@ const ImageItem = ({setShowModal, setImages, images, searchResults}) => {
     // Getting Random Photos From Unsplash API
     useEffect(() => {
         const fetchImages = async() => {
-            const response = await fetch(`https://api.unsplash.com/photos?client_id=rbPbnLR-xIOACH1d9pp_Wljai0of3oHtlJoN7_isCC4&per_page=12`)
+            const response = await fetch(`https://api.unsplash.com/photos?client_id=rbPbnLR-xIOACH1d9pp_Wljai0of3oHtlJoN7_isCC4&per_page=20`)
             const data = await response.json()
             setImages(data)
         }

@@ -220,14 +220,17 @@
             }
         }
         .user__photos_more{
-            margin: 0 auto; 
             font-family: 'Helvetica Neue', sans-serif;
             font-size: 1vw;
             margin: 2vw 0px 0px 0px;
             & a{
                 cursor: pointer;
+                transition: all .3s ease 0s;
                 :hover{
-                    color: #979cab;
+                    &{
+                        transition: all .3s ease 0s;
+                        color: #979cab;
+                    }
                 }
             }
         }
